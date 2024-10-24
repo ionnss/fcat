@@ -1,7 +1,10 @@
 # fcat
 
-Nietzsche reincarnado num gato
+Nietzsche reincarnado num gato. 
 
+Programa feito em GO, para coletar citações aleatórias e imprimir no temrinal.
+
+```
  ------------------------------------------------------
 /                                                      \
 | He who has a why to live for can bear almost any how |
@@ -19,3 +22,4 @@ Nietzsche reincarnado num gato
                \ \ ,  /      |
                 || |-_\__   /
                ((_/`(____,-'`)
+```
