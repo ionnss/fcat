@@ -38,18 +38,44 @@ func getRandomCitation(citations []string) string {
 	return citations[randomIndex]
 }
 
+func dividirTexto(texto string, largura int) []string {
+	var linhas []string
+	for len(texto) > largura {
+		quebra := strings.LastIndex(texto[:largura], " ")
+		if quebra == -1 {
+			quebra = largura
+		}
+		linhas = append(linhas, texto[:quebra])
+		texto = strings.TrimSpace(texto[quebra:])
+	}
+	linhas = append(linhas, texto)
+	return linhas
+}
+
 func imprimirGato(citacao string) {
-	tamanhoBalao := len(citacao)
+	// Definindo a largura máxima de cada linha do balão de diálogo
+	largura := 40
+	linhasCitacao := dividirTexto(citacao, largura)
+
+	// Calcula o tamanho do balão baseado na linha mais longa
+	tamanhoBalao := 0
+	for _, linha := range linhasCitacao {
+		if len(linha) > tamanhoBalao {
+			tamanhoBalao = len(linha)
+		}
+	}
+
 	linhaTopo := " " + strings.Repeat("-", tamanhoBalao+2)
 	linhaCima := "/" + strings.Repeat(" ", tamanhoBalao+2) + "\\"
-	linhaCitacao := fmt.Sprintf("| %s |", citacao)
 	linhaBaixo := "\\" + strings.Repeat(" ", tamanhoBalao+2) + "/"
 	linhaBase := " " + strings.Repeat("-", tamanhoBalao+2)
 
-	// Imprime o balão de diálogo
+	// Imprime o balão de diálogo com as linhas da citação
 	fmt.Println(linhaTopo)
 	fmt.Println(linhaCima)
-	fmt.Println(linhaCitacao)
+	for _, linha := range linhasCitacao {
+		fmt.Printf("| %-*s |\n", tamanhoBalao, linha)
+	}
 	fmt.Println(linhaBaixo)
 	fmt.Println(linhaBase)
 
